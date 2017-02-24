@@ -2,5 +2,6 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'thin'
+gem "shotgun"
+gem "thin"
 gem "sinatra"
