@@ -1,11 +1,12 @@
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
+
 class Scraper
   attr_accessor :doc
   
-  def initialize
-    @doc = Nokogiri::HTML(open("https://playoverwatch.com/en-us/career/pc/us/#{bnettaghere}"))
+  def initialize(battletag)
+    @doc = Nokogiri::HTML(open("https://playoverwatch.com/en-us/career/pc/us/#{battletag}"))
   end
   
   def competitive_rank
