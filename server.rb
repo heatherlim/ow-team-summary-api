@@ -1,6 +1,3 @@
-require 'sinatra'
-require 'json'
-
 get '/api/:battletag' do |battletag|
   content_type :json
   scraper = Scraper.new("#{battletag}")
