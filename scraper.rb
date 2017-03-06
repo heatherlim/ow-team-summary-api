@@ -1,8 +1,29 @@
 class Scraper
-  attr_accessor :doc
+  attr_accessor :doc, :error
   
   def initialize(battletag)
-    @doc = Nokogiri::HTML(open("https://playoverwatch.com/en-us/career/pc/us/#{battletag}"))
+    url = "https://playoverwatch.com/en-us/career/pc/us/#{battletag}"
+    begin
+      file = open(url)
+      @doc = Nokogiri::HTML(file)
+      rescue OpenURI::HTTPError => e
+        if e.message == '404 Not Found'
+          @error = 'Player not found'
+        else
+          raise e
+        end
+    end  
+  end
+  
+  def construct_json
+    if @error
+      {:error => @error}.to_json
+    else
+    { :player_name => self.player_name, 
+      :competitive_rank => self.competitive_rank, 
+      :top_three_heroes_played => self.top_three_heroes_played,
+      :player_portrait => self.player_portrait}.to_json
+    end
   end
   
   def competitive_rank
