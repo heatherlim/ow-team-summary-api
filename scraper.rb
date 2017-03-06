@@ -5,7 +5,7 @@ class Scraper
   attr_accessor :doc
   
   def initialize
-    @doc = Nokogiri::HTML(open('https://playoverwatch.com/en-us/career/pc/us/happysquared-1920'))
+    @doc = Nokogiri::HTML(open("https://playoverwatch.com/en-us/career/pc/us/#{bnettaghere}"))
   end
   
   def competitive_rank
