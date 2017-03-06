@@ -6,7 +6,11 @@ class Scraper
   end
   
   def competitive_rank
-    @doc.css('.competitive-rank .h6').children.first.text
+    if @doc.css('.competitive-rank .h6').empty?
+      ""
+    else
+      @doc.css('.competitive-rank .h6').children.first.text
+    end
   end
   
   def top_three_heroes_played
