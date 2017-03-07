@@ -30,7 +30,8 @@ class Scraper
     if @doc.css('.competitive-rank .h6').empty?
       ""
     else
-      @doc.css('.competitive-rank .h6').children.first.text
+      comp_rank = @doc.css('.competitive-rank .h6').children.first.text
+      comp_rank.to_i
     end
   end
   
