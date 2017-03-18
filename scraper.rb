@@ -39,11 +39,6 @@ class Scraper
       end
     end
     hero_hash
-    # {
-    #   @doc.css('#competitive .bar-text .title')[0].text => @doc.css('#competitive .bar-text .description')[0].text,
-    #   @doc.css('#competitive .bar-text .title')[1].text => @doc.css('#competitive .bar-text .description')[1].text,
-    #   @doc.css('#competitive .bar-text .title')[2].text => @doc.css('#competitive .bar-text .description')[2].text
-    # }
   end
   
   def player_name
