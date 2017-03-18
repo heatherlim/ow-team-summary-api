@@ -16,14 +16,10 @@ class Scraper
   end
   
   def construct_json
-    if @error
-      {:error => @error}.to_json
-    else
     { :player_name => self.player_name, 
       :competitive_rank => self.competitive_rank, 
       :top_three_heroes_played => self.top_three_heroes_played,
       :player_portrait => self.player_portrait}.to_json
-    end
   end
   
   def competitive_rank
@@ -36,11 +32,18 @@ class Scraper
   end
   
   def top_three_heroes_played
-    {
-      @doc.css('#competitive .bar-text .title')[0].text => @doc.css('#competitive .bar-text .description')[0].text,
-      @doc.css('#competitive .bar-text .title')[1].text => @doc.css('#competitive .bar-text .description')[1].text,
-      @doc.css('#competitive .bar-text .title')[2].text => @doc.css('#competitive .bar-text .description')[2].text
-    }
+    hero_hash = {}
+    for i in 0..2
+      if @doc.css('#competitive .bar-text .description')[i].text != "--"
+        hero_hash[@doc.css('#competitive .bar-text .title')[i].text] = @doc.css('#competitive .bar-text .description')[i].text
+      end
+    end
+    hero_hash
+    # {
+    #   @doc.css('#competitive .bar-text .title')[0].text => @doc.css('#competitive .bar-text .description')[0].text,
+    #   @doc.css('#competitive .bar-text .title')[1].text => @doc.css('#competitive .bar-text .description')[1].text,
+    #   @doc.css('#competitive .bar-text .title')[2].text => @doc.css('#competitive .bar-text .description')[2].text
+    # }
   end
   
   def player_name
